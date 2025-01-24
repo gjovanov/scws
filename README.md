@@ -16,6 +16,9 @@ This project was inspired by [ws-scrcpy](https://github.com/NetrisTV/ws-scrcpy),
 - [Tango-App's](https://docs.tangoapp.dev) great Readable/Writable-Stream APIs and [adb](https://developer.android.com/tools/adb) client implementation [@yume-chan](https://github.com/yume-chan/ya-webadb).
 - [uWebSockets.js](https://github.com/uNetworking/uWebSockets.js) - extermely fast WS-Server, that allows for this low latency video/audio streaming.
 
+# Demo
+[ScrCpy via WebSockets Demo](https://scws.roomler.live/)
+
 # Architecture
 ![Architecture](./assets/scws.png "App architecture")
 
