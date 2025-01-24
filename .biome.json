@@ -1,0 +1,17 @@
+{
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"recommended": true
+		}
+	},
+	"overrides": {
+		"linter": {
+			"rules": {
+				"suspicious": {
+					"noExplicitAny": "off"
+				}
+			}
+		}
+	}
+}

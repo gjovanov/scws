@@ -1,0 +1,1 @@
+# Dummy folder as an extract location of 'apkm' and 'xapk' files

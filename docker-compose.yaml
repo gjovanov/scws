@@ -1,0 +1,81 @@
+services:
+  redroid-1:
+    container_name: redroid-1
+    hostname: redroid-1
+    image: redroid/redroid:14.0.0-latest
+    privileged: true
+    command:
+      - "androidboot.redroid_fps=60"
+    ports:
+      - '6555:5555'
+    restart: always
+    networks:
+      - streaming-network
+
+  redroid-2:
+    container_name: redroid-2
+    hostname: redroid-2
+    image: redroid/redroid:14.0.0-latest
+    privileged: true
+    command:
+      - "androidboot.redroid_fps=60"
+    ports:
+      - '7555:5555'
+    restart: always
+    networks:
+      - streaming-network
+
+  redroid-3:
+    container_name: redroid-3
+    hostname: redroid-3
+    image: redroid/redroid:14.0.0-latest
+    privileged: true
+    command:
+      - "androidboot.redroid_fps=60"
+    ports:
+      - '8555:5555'
+    restart: always
+    networks:
+      - streaming-network
+
+  scws:
+    container_name: scws
+    hostname: scws
+    build:
+      context: .
+      dockerfile: 'Dockerfile'
+    ports:
+      - '4001:4001'
+    restart: always
+    networks:
+      - streaming-network
+    volumes:
+      - '/home/gjovanov/gjovanov/scws/packages/api/apps:/app/packages/api/apps'
+    depends_on:
+      - redroid-1
+      - redroid-2
+      - redroid-3
+    healthcheck:
+      test: adb connect redroid-1:5555 && adb connect redroid-2:5555 && adb connect redroid-3:5555
+      interval: 10s
+      start_period: 10s
+
+  # adb-connect:
+  #   container_name: adb-connect
+  #   hostname: adb-connect
+  #   build:
+  #     context: .
+  #     dockerfile: 'Dockerfile'
+  #   restart: no
+  #   networks:
+  #     - streaming-network
+  #   depends_on:
+  #     - redroid-1
+  #     - redroid-2
+  #     - redroid-3
+  #     - scws
+  #   entrypoint: [ "bash", "-c", "adb connect redroid-1:5555 && adb connect redroid-2:5555 && adb connect redroid-3:5555"]
+
+networks:
+  streaming-network:
+    name: streaming-network
